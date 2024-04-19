@@ -1,8 +1,18 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
+import { WINSTON_MODULE_NEST_PROVIDER } from 'nest-winston';
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
-  await app.listen(3000);
+  try {
+    const app = await NestFactory.create(AppModule);
+    app.useLogger(app.get(WINSTON_MODULE_NEST_PROVIDER)); // Использование WINSTON_MODULE_NEST_PROVIDER как логгера
+    await app.listen(3000);
+  } catch (error) {
+    console.error('Ошибка при запуске приложения:', error);
+    throw error; // Чтобы передать ошибку дальше
+  }
 }
-bootstrap();
+bootstrap().catch((error) => {
+  console.error('Ошибка при запуске приложения:', error);
+  process.exit(1);
+});
