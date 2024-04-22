@@ -6,7 +6,7 @@ import {
   MinLength,
 } from 'class-validator';
 
-export class WishlistCreateDto {
+export class CreateWishlistDto {
   @IsString()
   @MinLength(2, {
     message: 'Необходимо ввести минимум 1 символ',
@@ -15,6 +15,12 @@ export class WishlistCreateDto {
     message: 'Необходимо ввести максимум 250 символов',
   })
   name: string;
+
+  @IsString()
+  @MaxLength(1500, {
+    message: 'Необходимо ввести максимум 1500 символов',
+  })
+  description: string;
 
   @IsUrl()
   image: string;
