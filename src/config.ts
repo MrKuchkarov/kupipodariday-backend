@@ -1,5 +1,5 @@
 export default () => ({
-  secretKey: process.env.JWT_SECRET || 'secretKey',
+  secretKey: process.env.JWT_SECRET,
   port: parseInt(process.env.SERVER_PORT, 10),
   db: {
     host: process.env.POSTGRES_HOST,
