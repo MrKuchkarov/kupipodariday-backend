@@ -9,8 +9,11 @@ import { WishEntity } from './wishes/entities/wish.entity';
 import { OfferEntity } from './offers/entities/offer.entity';
 import { WishlistEntity } from './wishlists/entities/wishlist.entity';
 import config from './config';
-import dotenv from 'dotenv';
-dotenv.config();
+import 'dotenv/config';
+import { UsersModule } from './users/users.module';
+import { WishesModule } from './wishes/wisher.module';
+import { WishlistsModule } from './wishlists/wishlists.module';
+import { OffersModule } from './offers/offers.module';
 
 @Module({
   imports: [
@@ -20,10 +23,10 @@ dotenv.config();
       username: config().db.username,
       password: config().db.password,
       database: config().db.name,
-      //entities: [__dirname + '/**/*.entity.{ts,js}'],
       entities: [UserEntity, WishEntity, WishlistEntity, OfferEntity],
       synchronize: true,
     }),
+    ConfigModule.forRoot({ isGlobal: true }),
     ConfigModule.forRoot({
       envFilePath: ['.env.testing', '.env.development', '.env'],
     }),
@@ -40,6 +43,10 @@ dotenv.config();
         new winston.transports.File({ filename: 'error.log', level: 'error' }),
       ],
     }),
+    UsersModule,
+    WishesModule,
+    WishlistsModule,
+    OffersModule,
   ],
   controllers: [AppController],
   providers: [],
