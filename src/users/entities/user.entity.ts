@@ -39,7 +39,7 @@ export class UserEntity extends EntityDefault {
   about: string;
 
   @Column({
-    default: 'https://robohash.org/developer.png',
+    default: 'https://i.pravatar.cc/300',
   })
   @IsUrl()
   avatar: string;

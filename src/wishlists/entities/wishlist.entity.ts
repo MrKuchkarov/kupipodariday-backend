@@ -6,7 +6,7 @@ import {
   ManyToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
-import { IsString, IsUrl, Length } from 'class-validator';
+import { IsString, IsUrl, Length, MaxLength, MinLength } from 'class-validator';
 import { WishEntity } from '../../wishes/entities/wish.entity';
 import { UserEntity } from '../../users/entities/user.entity';
 
@@ -21,10 +21,19 @@ export class WishlistEntity {
   name: string;
 
   @Column()
+  @IsString()
+  @MinLength(1, {
+    message: 'Необходим минимум 1 символ',
+  })
+  @MaxLength(1024, {
+    message: 'Необходимо максимум 1500 символа',
+  })
+  description?: string;
+
+  @Column()
   @IsUrl()
   image: string;
 
-  //@OneToMany(() => Wish, (Wish) => Wish.wishlist)
   @ManyToMany(() => WishEntity)
   @JoinTable()
   items: WishEntity[];
