@@ -1,7 +1,7 @@
 {
   "name": "kupipodariday-backend",
   "version": "0.0.1",
-  "description": "",
+  "description": "API Стартеркит проекта разработки бэкенд сервиса вишлистов КупиПодариДай",
   "author": "Mr.Kuchkarov 2024",
   "private": true,
   "license": "UNLICENSED",
