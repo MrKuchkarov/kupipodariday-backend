@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { forwardRef, Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { ConfigModule } from '@nestjs/config';
 import { WinstonModule } from 'nest-winston';
@@ -14,6 +14,7 @@ import { UsersModule } from './users/users.module';
 import { WishesModule } from './wishes/wisher.module';
 import { WishlistsModule } from './wishlists/wishlists.module';
 import { OffersModule } from './offers/offers.module';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -43,6 +44,7 @@ import { OffersModule } from './offers/offers.module';
         new winston.transports.File({ filename: 'error.log', level: 'error' }),
       ],
     }),
+    forwardRef(() => AuthModule),
     UsersModule,
     WishesModule,
     WishlistsModule,

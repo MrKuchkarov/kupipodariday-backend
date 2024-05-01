@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { forwardRef, Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { UserEntity } from '../users/entities/user.entity';
 import { WishEntity } from '../wishes/entities/wish.entity';
@@ -13,15 +13,16 @@ import { WishesService } from '../wishes/wishes.service';
 import { AuthController } from './auth.controller';
 import { LocalStrategy } from './local.strategy';
 import { JwtStrategy } from './jwt.strategy';
+import config from '../config';
 @Module({
   imports: [
     TypeOrmModule.forFeature([UserEntity, WishEntity]),
-    UsersModule,
+    forwardRef(() => UsersModule),
     PassportModule,
     JwtModule.registerAsync({
       imports: [ConfigModule],
       useFactory: async () => ({
-        secret: process.env.JWT_SECRET,
+        secret: config().secretKey,
         signOptions: { expiresIn: '1h' },
       }),
       inject: [ConfigService],
@@ -36,6 +37,5 @@ import { JwtStrategy } from './jwt.strategy';
     UsersService,
     WishesService,
   ],
-  exports: [AuthService, AuthModule],
 })
 export class AuthModule {}
