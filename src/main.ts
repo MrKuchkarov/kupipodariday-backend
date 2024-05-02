@@ -15,7 +15,7 @@ async function bootstrap() {
     );
     app.enableCors();
     app.useLogger(app.get(WINSTON_MODULE_NEST_PROVIDER)); // Использование WINSTON_MODULE_NEST_PROVIDER как логгера
-    await app.listen(SERVER_PORT);
+    await app.listen(3001);
   } catch (error) {
     console.error('Ошибка при запуске приложения:', error);
     throw error; // Чтобы передать ошибку дальше
