@@ -4,6 +4,7 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
+import { UserEntity } from '../users/entities/user.entity';
 
 @Entity()
 export class EntityDefault {
@@ -16,3 +17,5 @@ export class EntityDefault {
   @UpdateDateColumn()
   updatedAt: Date;
 }
+
+export type TUser = Omit<UserEntity, 'password'>;

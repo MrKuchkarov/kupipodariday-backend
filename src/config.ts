@@ -1,12 +1,25 @@
-export default () => ({
-  secretKey: process.env.JWT_SECRET,
-  port: parseInt(process.env.SERVER_PORT, 10),
-  db: {
-    host: process.env.POSTGRES_HOST,
-    port: process.env.POSTGRES_PORT,
+import dotenv from 'dotenv';
 
-    name: process.env.POSTGRES_DB,
-    username: process.env.POSTGRES_USER,
-    password: process.env.POSTGRES_PASSWORD,
+dotenv.config();
+
+const {
+  JWT_SECRET,
+  POSTGRES_HOST,
+  POSTGRES_PORT,
+  POSTGRES_DB,
+  POSTGRES_USER,
+  POSTGRES_PASSWORD,
+  SERVER_PORT = '',
+} = process.env;
+export default () => ({
+  secretKey: JWT_SECRET,
+  port: parseInt(SERVER_PORT, 10),
+  db: {
+    host: POSTGRES_HOST,
+    port: POSTGRES_PORT,
+
+    name: POSTGRES_DB,
+    username: POSTGRES_USER,
+    password: POSTGRES_PASSWORD,
   },
 });
