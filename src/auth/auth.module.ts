@@ -4,16 +4,16 @@ import { UserEntity } from '../users/entities/user.entity';
 import { WishEntity } from '../wishes/entities/wish.entity';
 import { UsersModule } from '../users/users.module';
 import { PassportModule } from '@nestjs/passport';
+import { JwtStrategy } from './jwt.strategy';
 import { JwtModule } from '@nestjs/jwt';
 import { ConfigModule, ConfigService } from '@nestjs/config';
-import 'dotenv/config';
 import { AuthService } from './auth.service';
 import { UsersService } from '../users/users.service';
 import { WishesService } from '../wishes/wishes.service';
 import { AuthController } from './auth.controller';
 import { LocalStrategy } from './local.strategy';
-import { JwtStrategy } from './jwt.strategy';
 import config from '../config';
+
 @Module({
   imports: [
     TypeOrmModule.forFeature([UserEntity, WishEntity]),
