@@ -3,9 +3,7 @@ import { AppModule } from './app.module';
 import { WINSTON_MODULE_NEST_PROVIDER } from 'nest-winston';
 import { ValidationPipe } from '@nestjs/common';
 import dotenv from 'dotenv';
-
 dotenv.config();
-
 const { SERVER_PORT = '' } = process.env;
 async function bootstrap() {
   try {
@@ -15,7 +13,7 @@ async function bootstrap() {
     );
     app.enableCors();
     app.useLogger(app.get(WINSTON_MODULE_NEST_PROVIDER)); // Использование WINSTON_MODULE_NEST_PROVIDER как логгера
-    await app.listen(3001);
+    await app.listen(SERVER_PORT);
   } catch (error) {
     console.error('Ошибка при запуске приложения:', error);
     throw error; // Чтобы передать ошибку дальше
