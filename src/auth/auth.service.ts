@@ -2,34 +2,33 @@ import { JwtService } from '@nestjs/jwt';
 import { UsersService } from '../users/users.service';
 import { UserEntity } from '../users/entities/user.entity';
 import { CreateUserDto } from '../users/dto/create-user.dto';
-import { UnauthorizedException } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import * as bcrypt from 'bcrypt';
 
+@Injectable()
 export class AuthService {
   constructor(
     private jwtService: JwtService,
     private usersService: UsersService
   ) {}
 
-  async login(user: UserEntity) {
+  login(user: UserEntity) {
     const payload = { sub: user.id };
     return { access_token: this.jwtService.sign(payload, { expiresIn: '7d' }) };
   }
 
-  async validate(username: string, password: string) {
+  async validate(username: string, password: string): Promise<any> {
     const user = await this.usersService.findUserByUsername(username);
+    let ifValuesMatched = false;
+    await bcrypt.compare(password, user.password).then(isAMatch => {
+      if (!isAMatch) return null;
+      ifValuesMatched = true;
+    });
 
-    if (!user) {
-      throw new UnauthorizedException('Invalid username or password');
+    if (user && ifValuesMatched) {
+      const { ...res } = user;
+      return res;
     }
-
-    const isAMatch = await bcrypt.compare(password, user.password);
-
-    if (!isAMatch) {
-      throw new UnauthorizedException('Invalid username or password');
-    }
-
-    return { ...user };
   }
 
   async signup(createUserDto: CreateUserDto) {
