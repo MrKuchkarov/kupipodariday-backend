@@ -16,12 +16,6 @@ export class CreateWishlistDto {
   })
   name: string;
 
-  @IsString()
-  @MaxLength(1500, {
-    message: 'Необходимо ввести максимум 1500 символов',
-  })
-  description: string;
-
   @IsUrl()
   image: string;
 

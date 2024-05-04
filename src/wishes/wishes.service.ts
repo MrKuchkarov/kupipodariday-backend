@@ -101,7 +101,6 @@ export class WishesService {
     } else if (requiredWish.owner.id !== user.id) {
       throw new UnauthorizedException('Нельзя удалять чужое желание');
     }
-
     return this.wishRepository.delete(id);
   }
 

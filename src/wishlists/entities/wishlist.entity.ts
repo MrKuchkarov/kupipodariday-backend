@@ -21,16 +21,6 @@ export class WishlistEntity {
   name: string;
 
   @Column()
-  @IsString()
-  @MinLength(1, {
-    message: 'Необходим минимум 1 символ',
-  })
-  @MaxLength(1024, {
-    message: 'Необходимо максимум 1500 символа',
-  })
-  description?: string;
-
-  @Column()
   @IsUrl()
   image: string;
 
