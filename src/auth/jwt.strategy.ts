@@ -21,6 +21,6 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
         'Для получения этой информации нужно авторизоваться'
       );
     }
-    return { userId: payload.sub, username: payload.username };
+    return { id: payload.sub, username: payload.username };
   }
 }

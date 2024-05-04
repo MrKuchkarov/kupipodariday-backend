@@ -25,7 +25,6 @@ export class UsersService {
   }
 
   async findUserWishes(userId: number) {
-    console.log(userId);
     const user = await this.findOneUser({
       where: { id: userId },
       relations: {

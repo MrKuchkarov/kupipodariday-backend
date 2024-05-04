@@ -26,10 +26,7 @@ export class WishlistsController {
   @UseGuards(JwtGuard)
   @Post()
   create(@Req() req: any, @Body() createWishlistDto: CreateWishlistDto) {
-    return this.wishlistsService.createWishlist(
-      req.user.userId,
-      createWishlistDto
-    );
+    return this.wishlistsService.createWishlist(req.user.id, createWishlistDto);
   }
 
   @UseGuards(JwtGuard)
