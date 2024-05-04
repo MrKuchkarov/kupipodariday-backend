@@ -6,7 +6,7 @@ import {
   ManyToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
-import { IsString, IsUrl, Length, MaxLength, MinLength } from 'class-validator';
+import { IsString, IsUrl, Length } from 'class-validator';
 import { WishEntity } from '../../wishes/entities/wish.entity';
 import { UserEntity } from '../../users/entities/user.entity';
 

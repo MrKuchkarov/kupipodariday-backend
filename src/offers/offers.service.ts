@@ -22,14 +22,13 @@ export class OffersService {
   async create(createOfferDto: CreateOfferDto, user: any) {
     const itemId = createOfferDto.itemId;
     const wish = await this.wishesRepository.findOne({ where: { id: itemId } });
-
+    if (!wish) {
+      throw new NotFoundException('Данное желание не найдено');
+    }
     if (wish.owner.id === user.id) {
       throw new BadRequestException(
         'Вы не можете внести деньги на собственное желание'
       );
-    }
-    if (!wish) {
-      throw new NotFoundException('Данное желание не найдено');
     }
     if (wish.raised > wish.price)
       throw new BadRequestException(
