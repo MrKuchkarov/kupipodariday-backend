@@ -9,7 +9,6 @@ import {
   MinLength,
 } from 'class-validator';
 import { UserEntity } from '../../users/entities/user.entity';
-import { WishlistEntity } from '../../wishlists/entities/wishlist.entity';
 import { OfferEntity } from '../../offers/entities/offer.entity';
 
 @Entity()
@@ -57,11 +56,8 @@ export class WishEntity extends EntityDefault {
   @Column({ default: 0 })
   copied: number;
 
-  @ManyToOne(() => UserEntity, owner => owner.wishes)
+  @ManyToOne(() => UserEntity, user => user.wishes)
   owner: UserEntity;
-
-  @ManyToOne(() => WishlistEntity, wishlist => wishlist.items)
-  wishlist: WishlistEntity;
 
   @OneToMany(() => OfferEntity, offer => offer.item)
   offers: OfferEntity[];

@@ -22,7 +22,6 @@ export class OffersController {
   create(@Req() req: any, @Body() createOfferDto: CreateOfferDto) {
     return this.offersService.create(createOfferDto, req.user);
   }
-
   @Get()
   findAll() {
     return this.offersService.findAll();
