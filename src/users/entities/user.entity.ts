@@ -55,7 +55,7 @@ export class UserEntity extends EntityDefault {
   password: string;
 
   @OneToMany(() => WishEntity, wish => wish.owner)
-  wishes: WishEntity;
+  wishes: WishEntity[];
 
   @OneToMany(() => WishlistEntity, wishlist => wishlist.owner)
   wishlists: WishlistEntity[];

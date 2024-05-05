@@ -23,17 +23,17 @@ export class UsersController {
 
   @Get('me')
   findMe(@Req() req: any) {
-    return this.usersService.findOne(req.user.userId);
+    return this.usersService.findOne(req.user.id);
   }
 
   @Get('me/wishes')
   findMysWishes(@Req() req: any) {
-    return this.usersService.findUserWishes(req.user.userId);
+    return this.usersService.findUserWishes(req.user.id);
   }
 
   @Patch('/me')
   update(@Req() req: any, @Body() updateUserDto: UpdateUserDto) {
-    return this.usersService.updateUser(+req.user.userId, updateUserDto);
+    return this.usersService.updateUser(+req.user.id, updateUserDto);
   }
   @Get(':username')
   findUserByUsername(@Param('username') username: string) {

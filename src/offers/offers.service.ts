@@ -19,11 +19,25 @@ export class OffersService {
     private wishesRepository: Repository<WishEntity>
   ) {}
 
+  async findAll() {
+    return await this.offerRepository.find();
+  }
+
+  findOne(id: number) {
+    return this.offerRepository.findOneBy({ id });
+  }
+
   async create(createOfferDto: CreateOfferDto, user: any) {
     const itemId = createOfferDto.itemId;
-    const wish = await this.wishesRepository.findOne({ where: { id: itemId } });
+    const wish = await this.wishesRepository.findOne({
+      where: { id: itemId },
+      relations: ['owner'],
+    });
     if (!wish) {
       throw new NotFoundException('Данное желание не найдено');
+    }
+    if (!wish.owner) {
+      throw new NotFoundException('Владелец желания не найден');
     }
     if (wish.owner.id === user.id) {
       throw new BadRequestException(
@@ -37,14 +51,6 @@ export class OffersService {
 
     await this.wishesRepository.update({ id: wish.id }, wish);
     return this.offerRepository.save({ ...createOfferDto, user, itemId: wish });
-  }
-
-  async findAll() {
-    return await this.offerRepository.find();
-  }
-
-  findOne(id: number) {
-    return this.offerRepository.findOneBy({ id });
   }
 
   async update(id: number, updateOfferDto: UpdateOfferDto) {
