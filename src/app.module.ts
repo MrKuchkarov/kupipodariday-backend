@@ -1,5 +1,4 @@
 import { forwardRef, Module } from '@nestjs/common';
-import { AppController } from './app.controller';
 import { ConfigModule } from '@nestjs/config';
 import { WinstonModule } from 'nest-winston';
 import * as winston from 'winston';
@@ -8,7 +7,7 @@ import { UserEntity } from './users/entities/user.entity';
 import { WishEntity } from './wishes/entities/wish.entity';
 import { OfferEntity } from './offers/entities/offer.entity';
 import { WishlistEntity } from './wishlists/entities/wishlist.entity';
-import config from './config';
+import config from './config/config';
 import 'dotenv/config';
 import { UsersModule } from './users/users.module';
 import { WishesModule } from './wishes/wisher.module';
@@ -50,7 +49,6 @@ import { AuthModule } from './auth/auth.module';
     WishlistsModule,
     OffersModule,
   ],
-  controllers: [AppController],
   providers: [],
 })
 export class AppModule {}

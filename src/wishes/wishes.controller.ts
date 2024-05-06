@@ -38,7 +38,7 @@ export class WishesController {
   findTopWishes() {
     return this.wishesService.findTopWishes();
   }
-
+  @UseGuards(JwtGuard)
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.wishesService.findWishById(+id);
