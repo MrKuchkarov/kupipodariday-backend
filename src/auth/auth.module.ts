@@ -12,7 +12,7 @@ import { UsersService } from '../users/users.service';
 import { WishesService } from '../wishes/wishes.service';
 import { AuthController } from './auth.controller';
 import { LocalStrategy } from './local.strategy';
-import config from '../config';
+import config from '../config/config';
 
 @Module({
   imports: [
