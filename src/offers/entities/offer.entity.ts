@@ -4,7 +4,7 @@ import { IsBoolean, IsNumber } from 'class-validator';
 import { UserEntity } from '../../users/entities/user.entity';
 import { WishEntity } from '../../wishes/entities/wish.entity';
 
-@Entity()
+@Entity({ name: 'offer' })
 export class OfferEntity extends EntityDefault {
   @Column()
   @IsNumber({ maxDecimalPlaces: 2 })

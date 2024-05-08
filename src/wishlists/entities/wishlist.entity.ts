@@ -10,7 +10,7 @@ import { IsString, IsUrl, Length } from 'class-validator';
 import { WishEntity } from '../../wishes/entities/wish.entity';
 import { UserEntity } from '../../users/entities/user.entity';
 
-@Entity()
+@Entity({ name: 'wishlist' })
 export class WishlistEntity {
   @PrimaryGeneratedColumn()
   id: number;

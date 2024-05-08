@@ -68,7 +68,6 @@ export class WishesService {
 
   async copyWish(id: number, user: UserEntity) {
     const requestedWish = await this.findWishById(id);
-    console.log(requestedWish.owner);
     if (!requestedWish) {
       throw new NotFoundException('Такого желания не существует');
     }
