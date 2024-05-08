@@ -12,7 +12,7 @@ import { OfferEntity } from '../../offers/entities/offer.entity';
 import { WishlistEntity } from '../../wishlists/entities/wishlist.entity';
 import { WishEntity } from '../../wishes/entities/wish.entity';
 
-@Entity()
+@Entity({ name: 'user' })
 export class UserEntity extends EntityDefault {
   @Column()
   @IsString()

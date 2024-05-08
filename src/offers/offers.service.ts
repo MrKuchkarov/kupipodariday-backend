@@ -28,11 +28,12 @@ export class OffersService {
   }
 
   async create(createOfferDto: CreateOfferDto, user: any) {
-    const itemId = createOfferDto.itemId;
+    const { itemId, amount } = createOfferDto;
     const wish = await this.wishesRepository.findOne({
       where: { id: itemId },
       relations: ['owner'],
     });
+    const raised = wish.raised + amount;
     if (!wish) {
       throw new NotFoundException('Данное желание не найдено');
     }
@@ -44,11 +45,11 @@ export class OffersService {
         'Вы не можете внести деньги на собственное желание'
       );
     }
-    if (wish.raised > wish.price)
+    if (raised > wish.price)
       throw new BadRequestException(
         'Нельзя внести сумму больше, чем необходимо для осуществления желания'
       );
-
+    wish.raised += amount;
     await this.wishesRepository.update({ id: wish.id }, wish);
     return this.offerRepository.save({ ...createOfferDto, user, itemId: wish });
   }
